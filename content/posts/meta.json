@@ -1,0 +1,42 @@
+{
+	"ext": ".md",
+	"tags": [
+		{
+			"title": "Uncategorized",
+			"color": "#999"
+		},
+		{
+			"title": "CSS",
+			"color": "#5aba59"
+		},
+		{
+			"title": "Pure",
+			"color": "#4d85d1"
+		},
+		{
+			"title": "JavaScript",
+			"color": "#df2d4f"
+		}
+	],
+	"files": {
+		"2013-12": {
+			".": [
+				{
+					"title": "Photos from CSSConf and JSConf"
+				}
+			]
+		},
+		"2014-01": {
+			".": [
+				{
+					"title": "Everything You Need to Know About Grunt",
+					"tags": ["JavaScript"]
+				},
+				{
+					"title": "Introducing Pure",
+					"tags": ["CSS", "Pure"]
+				}
+			]
+		}
+	}
+}
