@@ -1,4 +1,3 @@
-fritz-lium.github.io
-====================
+# fritz-lium.github.io
 
-My Github Homepage.
+Fritz-Lium's Github Homepage.
