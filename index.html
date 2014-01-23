@@ -7,21 +7,26 @@
   <meta name="description" content="Fritz's Blog.">
 
   <title>Fritz's Blog</title>
-  <link rel="stylesheet" href="css/pure-min.css">
+  <link rel="stylesheet" href="/css/pure-min.css">
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="css/blog-old-ie.css">
+  <link rel="stylesheet" href="/css/pure-blog-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="/css/pure-blog.css">
   <!--<![endif]-->
 
   <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
+  <script src="/js/html5shiv.js"></script>
   <![endif]-->
 
-  <link rel="stylesheet" href="css/main.css">
-  <script src="js/main.js"></script>
+  <script src="/js/underscore-min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/main.js"></script>
+  <script src="/js/blog.js"></script>
+
 </head>
 <body>
 
@@ -51,17 +56,17 @@
     <div>
       <!-- A wrapper for all the blog posts -->
       <div class="posts">
-        <h1 class="content-subhead">Pinned Post</h1>
+        <h1 class="content-subhead">Recent Posts</h1>
 
         <!-- A single blog post -->
         <section class="post">
           <header class="post-header">
 
-            <h2 class="post-title">Introducing Pure</h2>
+            <h2 class="post-title"><a href="#">Introducing Pure</a></h2>
 
             <p class="post-meta">
-              <a class="post-category post-category-design" href="index.html?tag=CSS">CSS</a> <a
-              class="post-category post-category-pure" href="index.html?tag=Pure">Pure</a>
+              <a class="post-category post-category-design" href="#">CSS</a> <a
+              class="post-category post-category-pure" href="#">Pure</a>
             </p>
           </header>
 
@@ -74,18 +79,14 @@
             </p>
           </div>
         </section>
-      </div>
-
-      <div class="posts">
-        <h1 class="content-subhead">Recent Posts</h1>
 
         <section class="post">
           <header class="post-header">
 
-            <h2 class="post-title">Everything You Need to Know About Grunt</h2>
+            <h2 class="post-title"><a href="#">Everything You Need to Know About Grunt</a></h2>
 
             <p class="post-meta">
-              <a class="post-category post-category-js" href="index.html?tag=Javascript">JavaScript</a>
+              <a class="post-category post-category-js" href="#">JavaScript</a>
             </p>
           </header>
 
@@ -102,10 +103,10 @@
         <section class="post">
           <header class="post-header">
 
-            <h2 class="post-title">Photos from CSSConf and JSConf</h2>
+            <h2 class="post-title"><a href="#">Photos from CSSConf and JSConf</a></h2>
 
             <p class="post-meta">
-              <a class="post-category" href="index.html?tag=Uncategorized">Uncategorized</a>
+              <a class="post-category" href="#">Uncategorized</a>
             </p>
           </header>
 
