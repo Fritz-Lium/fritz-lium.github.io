@@ -2,29 +2,31 @@
  * Created by fritz on 1/23/14.
  */
 $(document).ready(function () {
+	// load post
 	var sTitle = getURLParams()['title'];
 	var target = 'posts';
-	getContentMeta(target, function (meta) {
-		var extension = meta['extension'];
-		var files = meta['files'];
-		var post = findPost(files, sTitle);
+	getContentMeta(target, function (data) {
+		var extension = data['extension'];
+		var post = findPost(data['files'], sTitle);
 		var pFile = post['path'] + extension;
-		getContentFile(target, pFile, function (content) {
-			post.content = content;
-			renderPost(post);
-		});
+		post.content = getContentFile(target, pFile);
+		renderPost(post);
 	});
 });
 
 function renderPost(post) {
 	$('title').text(post.title);
+	$('#main').html(toPostHTML(post));
+}
+
+function toPostHTML(post) {
 	var html = markdown.toHTML(post.content);
 	var $tmp = $('<div>').html(html);
 	// header h1
 	$tmp.children('h1:first').wrap('<div class="header">');
 	// content
 	$tmp.children().not('.header').wrapAll('<div class="content">');
-	$('#main').html($tmp.html());
+	return $tmp.html();
 }
 
 function findPost(files, sTitle, pFile) {

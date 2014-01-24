@@ -8,20 +8,31 @@
 	var globalScripts = ['underscore-min', 'markdown.min'];
 	var localScripts = window['localScripts'] || [];
 	var scripts = globalScripts.concat(localScripts);
-	for (var i = 0; i < scripts.length; i++) {
+	$.each(scripts, function (i, script) {
 		$.ajax({
 			async: false,
-			url: '/js/' + scripts[i] + '.js'
+			url: '/js/' + script + '.js'
 		});
-	}
+	});
 })();
 
-function getContentFile(target, pFile, callback) {
+function getContentFileMap(target, pFileMap) {
+	return _.map(pFileMap, function (pFile) {
+		return getContentFile(target, pFile);
+	});
+}
+
+function getContentFile(target, pFile) {
+	var data = '';
 	$.ajax({
 		cache: false,
+		async: false,
 		url: '/content/' + target + '/' + pFile,
-		success: callback
+		success: function (_data) {
+			data = _data;
+		}
 	});
+	return data;
 }
 
 function getContentMeta(target, callback) {
