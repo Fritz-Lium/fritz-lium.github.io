@@ -27,13 +27,6 @@ function renderPosts(posts) {
 	posts = posts.reverse();
 	var postsHTML = _.map(posts, toPostHTML);
 	$('.posts').append(postsHTML);
-
-	// link to tagged posts list
-	$('.posts').find('.post a.post-category').each(function (i, el) {
-		var tag = $(el).text();
-		var sTag = toSnakeCase(tag);
-		$(el).attr('href', '/?tag=' + sTag);
-	});
 }
 
 function toPostHTML(post, i, posts) {
@@ -44,18 +37,11 @@ function toPostHTML(post, i, posts) {
 		.wrapInner('<a href="/post/?path=' + post.path + '">')
 		.wrap('<header class="post-header">');
 	// tags
-	var allTags = posts.allTags;
-	var tags = _.map(post.tags || [], function (sTag) {
-		return findTag(allTags, sTag);
-	});
-	// add default tag
-	if (tags.length < 1 && allTags[0]) {
-		tags.push(allTags[0]);
-	}
+	var tags = getPostTags(post, posts.allTags);
 	var $meta = $('<p class="post-meta">');
 	_.each(tags, function (tag) {
-		$('<a class="post-category">').text(tag.title)
-			.css('background-color', tag.color).appendTo($meta);
+		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
+			.text(tag.title).css('background-color', tag.color).appendTo($meta);
 	});
 	$tmp.children('.post-header').append($meta);
 	// description

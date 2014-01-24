@@ -2,8 +2,19 @@
  * Created by fritz on 1/23/14.
  */
 
-function findTag(tags, sTag) {
-	return _.find(tags, match);
+function getPostTags(post, allTags) {
+	var tags = _.map(post.tags || [], function (sTag) {
+		return findTag(allTags, sTag);
+	});
+	// add default tag
+	if (tags.length < 1 && allTags[0]) {
+		tags.push(allTags[0]);
+	}
+	return tags;
+}
+
+function findTag(allTags, sTag) {
+	return _.find(allTags, match);
 	function match(tag) {
 		return toSnakeCase(tag.title) === sTag;
 	}

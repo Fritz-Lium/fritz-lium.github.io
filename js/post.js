@@ -7,10 +7,12 @@ $(document).ready(function () {
 	var target = 'posts';
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
+		var allTags = data['tags'];
 		var post = findPost(data['files'], sPath);
 		var pFile = sPath + extension;
 		getContentFile(target, pFile, function (err, data) {
 			post.content = data;
+			post._tags = getPostTags(post, allTags);
 			renderPost(post);
 		});
 	});
@@ -26,6 +28,13 @@ function toPostHTML(post) {
 	var $tmp = $('<div>').html(html);
 	// header h1
 	$tmp.children('h1:first').wrap('<div class="header">');
+	// tags
+	var $meta = $('<p class="post-meta">');
+	_.each(post._tags, function (tag) {
+		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
+			.text(tag.title).css('background-color', tag.color).appendTo($meta);
+	});
+	$tmp.children('.header').prepend($meta);
 	// content
 	$tmp.children().slice(1).wrapAll('<div class="content">');
 	return $tmp.html();
