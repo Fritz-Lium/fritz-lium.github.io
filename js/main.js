@@ -2,31 +2,15 @@
  * Created by fritz on 1/23/14.
  */
 
-(function () {
-	// with jquery loaded
-	// load scripts
-	var globalScripts = ['underscore-min', 'markdown.min'];
-	var localScripts = window['localScripts'] || [];
-	var scripts = globalScripts.concat(localScripts);
-	$.each(scripts, function (i, script) {
-		$.ajax({
-			async: false,
-			url: '/js/' + script + '.js'
-		});
-	});
-})();
-
-function getContentFile(target, pFile) {
-	var data = '';
+function getContentFile(target, pFile, callback) {
 	$.ajax({
 		cache: false,
 		async: false,
 		url: '/content/' + target + '/' + pFile,
-		success: function (_data) {
-			data = _data;
+		success: function (data) {
+			callback(null, data);
 		}
 	});
-	return data;
 }
 
 function getContentMeta(target, callback) {

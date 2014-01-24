@@ -9,8 +9,10 @@ $(document).ready(function () {
 		var extension = data['extension'];
 		var post = findPost(data['files'], sTitle);
 		var pFile = post['path'] + extension;
-		post.content = getContentFile(target, pFile);
-		renderPost(post);
+		getContentFile(target, pFile, function (err, data) {
+			post.content = data;
+			renderPost(post);
+		});
 	});
 });
 

@@ -8,11 +8,15 @@ $(document).ready(function () {
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
 		var posts = listPosts(data['files']);
-		_.each(posts, function (post) {
-			var pFile = post['path'] + extension;
-			post.content = getContentFile(target, pFile);
+		async.map(posts, function (post, next) {
+			var pFile = post.path + extension;
+			getContentFile(target, pFile, function (err, data) {
+				post.content = data;
+				next(null, post);
+			});
+		}, function (err, posts) {
+			renderPosts(posts);
 		});
-		renderPosts(posts);
 	});
 });
 
