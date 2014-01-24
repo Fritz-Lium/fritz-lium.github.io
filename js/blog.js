@@ -3,19 +3,17 @@
  */
 
 $(document).ready(function () {
-	// redirect to single post page
-	$('.posts').delegate('.post .post-title a', 'click', function (event) {
-		event.preventDefault();
-		var title = $(this).text();
+	// link to single post page
+	$('.posts').find('.post .post-title a').each(function (i, el) {
+		var title = $(el).text();
 		var sTitle = toSnakeCase(title);
-		location.href = '/post/?title=' + sTitle;
+		$(el).attr('href', '/post/?title=' + sTitle);
 	});
 
-	// redirect to tagged posts list
-	$('.posts').delegate('.post a.post-category', 'click', function (event) {
-		event.preventDefault();
-		var tag = $(this).text();
+	// link to tagged posts list
+	$('.posts').find('.post a.post-category').each(function (i, el) {
+		var tag = $(el).text();
 		var sTag = toSnakeCase(tag);
-		location.href = '/?tag=' + sTag;
+		$(el).attr('href', '/?tag=' + sTag);
 	});
 });

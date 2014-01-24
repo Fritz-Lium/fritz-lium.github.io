@@ -22,6 +22,9 @@
 		"2013-12": {
 			".": [
 				{
+					"title": "Page Title"
+				},
+				{
 					"title": "Photos from CSSConf and JSConf"
 				}
 			]

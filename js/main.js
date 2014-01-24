@@ -1,8 +1,24 @@
 /**
  * Created by fritz on 1/23/14.
  */
+
+(function () {
+	// with jquery loaded
+	// load scripts
+	var globalScripts = ['underscore-min', 'markdown.min'];
+	var localScripts = window['localScripts'] || [];
+	var scripts = globalScripts.concat(localScripts);
+	for (var i = 0; i < scripts.length; i++) {
+		$.ajax({
+			async: false,
+			url: '/js/' + scripts[i] + '.js'
+		});
+	}
+})();
+
 function getContentFile(target, pFile, callback) {
 	$.ajax({
+		cache: false,
 		url: '/content/' + target + '/' + pFile,
 		success: callback
 	});
@@ -10,6 +26,7 @@ function getContentFile(target, pFile, callback) {
 
 function getContentMeta(target, callback) {
 	$.ajax({
+		cache: false,
 		url: '/content/' + target + '.json',
 		success: callback
 	});

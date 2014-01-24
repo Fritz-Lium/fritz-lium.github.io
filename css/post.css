@@ -1,8 +1,27 @@
+@import url("main.css");
+
 .header h1 {
 	font-size: 2.2em;
 	margin: 0.4em 0;
 }
 
-.content-subhead {
-	margin: 30px 0 16px 0;
+.header, .content {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+@media (min-width: 48em) {
+	.header, .content {
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+	font-weight: 300;
+	color: #555;
 }

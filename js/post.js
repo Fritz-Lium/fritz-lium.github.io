@@ -18,7 +18,13 @@ $(document).ready(function () {
 
 function renderPost(post) {
 	$('title').text(post.title);
-	console.log(post.content);
+	var html = markdown.toHTML(post.content);
+	var $tmp = $('<div>').html(html);
+	// header h1
+	$tmp.children('h1:first').wrap('<div class="header">');
+	// content
+	$tmp.children().not('.header').wrapAll('<div class="content">');
+	$('#main').html($tmp.html());
 }
 
 function findPost(files, sTitle, pFile) {
