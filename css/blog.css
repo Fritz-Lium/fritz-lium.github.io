@@ -31,3 +31,10 @@
 	font-size: 80%;
 	letter-spacing: 0.2em;
 }
+
+#paginator {
+	text-align: right;
+}
+#paginator .pure-button {
+	height: 41px;
+}

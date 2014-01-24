@@ -1,14 +1,29 @@
 /**
  * Created by fritz on 1/22/14.
  */
+var params = getURLParams();
 
 $(document).ready(function () {
+	var pageSize = 3;
+	var page = params['page'] || 1;
+
 	// load posts
 	var target = 'posts';
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
 		var allTags = data['tags'];
 		var posts = listPosts(data['files']);
+		var pageCount = Math.ceil(posts.length / pageSize);
+
+		var $paginator = $('#paginator');
+		$paginator.find('.current').text(page);
+		if (page > 1) {
+			$paginator.find('.prev').attr('href', '/?page=' + (page - 1));
+		}
+		if (page < pageCount) {
+			$paginator.find('.next').attr('href', '/?page=' + (page + 1));
+		}
+
 		async.map(posts, function (post, next) {
 			var pFile = post.path + extension;
 			getContentFile(target, pFile, function (err, data) {
@@ -24,7 +39,6 @@ $(document).ready(function () {
 
 function renderPosts(posts) {
 	// order by date desc
-	posts = posts.reverse();
 	var postsHTML = _.map(posts, toPostHTML);
 	$('.posts').append(postsHTML);
 }
@@ -71,5 +85,5 @@ function listPosts(files, pFile) {
 			posts = posts.concat(listPosts(files[key], pFile + key + '/'));
 		}
 	}
-	return posts;
+	return posts.reverse();
 }
