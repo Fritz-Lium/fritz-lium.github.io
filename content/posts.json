@@ -33,11 +33,11 @@
 			".": [
 				{
 					"title": "Everything You Need to Know About Grunt",
-					"tags": ["JavaScript"]
+					"tags": ["javascript"]
 				},
 				{
 					"title": "Introducing Pure",
-					"tags": ["CSS", "Pure"]
+					"tags": ["css", "pure"]
 				}
 			]
 		}

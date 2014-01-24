@@ -2,6 +2,13 @@
  * Created by fritz on 1/23/14.
  */
 
+function findTag(tags, sTag) {
+	return _.find(tags, match);
+	function match(tag) {
+		return toSnakeCase(tag.title) === sTag;
+	}
+}
+
 function getContentFile(target, pFile, callback) {
 	$.ajax({
 		cache: false,

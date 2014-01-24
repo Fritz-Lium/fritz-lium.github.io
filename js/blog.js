@@ -7,6 +7,7 @@ $(document).ready(function () {
 	var target = 'posts';
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
+		var allTags = data['tags'];
 		var posts = listPosts(data['files']);
 		async.map(posts, function (post, next) {
 			var pFile = post.path + extension;
@@ -15,6 +16,7 @@ $(document).ready(function () {
 				next(null, post);
 			});
 		}, function (err, posts) {
+			posts.allTags = allTags;
 			renderPosts(posts);
 		});
 	});
@@ -34,14 +36,34 @@ function renderPosts(posts) {
 	});
 }
 
-function toPostHTML(post) {
+function toPostHTML(post, i, posts) {
 	var html = markdown.toHTML(post.content);
 	var $tmp = $('<div>').html(html);
 	// title
 	$tmp.children('h1:first').addClass('post-title')
 		.wrapInner('<a href="/post/?title=' + toSnakeCase(post.title) + '">')
 		.wrap('<header class="post-header">');
+	// tags
+	var allTags = posts.allTags;
+	var tags = _.map(post.tags || [], function (sTag) {
+		return findTag(allTags, sTag);
+	});
+	// add default tag
+	if (tags.length < 1 && allTags[0]) {
+		tags.push(allTags[0]);
+	}
+	var $meta = $('<p class="post-meta">');
+	_.each(tags, function (tag) {
+		$('<a class="post-category">').text(tag.title)
+			.css('background-color', tag.color).appendTo($meta);
+	});
+	$tmp.children('.post-header').append($meta);
 	// description
+	var $cut = $tmp.children('p').eq(1).nextAll();
+	$cut.remove();
+	if ($cut.length > 0) {
+		$('<p class="cutline">').text('> ... ...').appendTo($tmp);
+	}
 	$tmp.children().slice(1).wrapAll('<div class="post-description">');
 	// section
 	$tmp.wrapInner('<section class="post">');

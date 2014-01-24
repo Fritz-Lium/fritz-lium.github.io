@@ -45,6 +45,6 @@ function findPost(files, sTitle, pFile) {
 	}
 	return post || null;
 	function match(post) {
-		return toSnakeCase(post['title']) === sTitle;
+		return toSnakeCase(post.title) === sTitle;
 	}
 }
