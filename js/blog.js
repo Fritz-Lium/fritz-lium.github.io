@@ -41,7 +41,7 @@ function toPostHTML(post, i, posts) {
 	var $tmp = $('<div>').html(html);
 	// title
 	$tmp.children('h1:first').addClass('post-title')
-		.wrapInner('<a href="/post/?title=' + toSnakeCase(post.title) + '">')
+		.wrapInner('<a href="/post/?path=' + post.path + '">')
 		.wrap('<header class="post-header">');
 	// tags
 	var allTags = posts.allTags;

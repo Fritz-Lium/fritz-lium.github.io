@@ -11,7 +11,6 @@ function findTag(tags, sTag) {
 
 function getContentFile(target, pFile, callback) {
 	$.ajax({
-		cache: false,
 		url: '/content/' + target + '/' + pFile,
 		success: function (data) {
 			callback(null, data);

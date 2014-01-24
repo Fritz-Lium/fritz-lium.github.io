@@ -3,12 +3,12 @@
  */
 $(document).ready(function () {
 	// load post
-	var sTitle = getURLParams()['title'];
+	var sPath = getURLParams()['path'];
 	var target = 'posts';
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
-		var post = findPost(data['files'], sTitle);
-		var pFile = post['path'] + extension;
+		var post = findPost(data['files'], sPath);
+		var pFile = sPath + extension;
 		getContentFile(target, pFile, function (err, data) {
 			post.content = data;
 			renderPost(post);
@@ -31,20 +31,36 @@ function toPostHTML(post) {
 	return $tmp.html();
 }
 
-function findPost(files, sTitle, pFile) {
-	pFile = pFile || '';
-	var post;
-	for (var key in files) {
-		if (key === '.') {
-			post = _.find(files[key], match);
-			if (post) post.path = pFile + sTitle;
-		} else {
-			post = findPost(files[key], sTitle, pFile + key + '/');
-		}
-		if (post) break;
+function findPost(files, sPath) {
+	var segs = sPath.split('/');
+	var sTitle = segs.slice(-1)[0];
+	try {
+		var p = files;
+		_.each(segs.slice(0, -1), function (seg) {
+			p = p[seg];
+		});
+		return _.find(p['.'], match) || null;
+	} catch (err) {
+		return null;
 	}
-	return post || null;
 	function match(post) {
 		return toSnakeCase(post.title) === sTitle;
 	}
 }
+/*function findPost(files, sTitle, pFile) {
+ pFile = pFile || '';
+ var post;
+ for (var key in files) {
+ if (key === '.') {
+ post = _.find(files[key], match);
+ if (post) post.path = pFile + sTitle;
+ } else {
+ post = findPost(files[key], sTitle, pFile + key + '/');
+ }
+ if (post) break;
+ }
+ return post || null;
+ function match(post) {
+ return toSnakeCase(post.title) === sTitle;
+ }
+ }*/
