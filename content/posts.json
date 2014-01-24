@@ -22,10 +22,12 @@
 		"2013-12": {
 			".": [
 				{
-					"title": "Page Title"
+					"title": "Page Title",
+					"date": "2013-12-30 21:00:00"
 				},
 				{
-					"title": "Photos from CSSConf and JSConf"
+					"title": "Photos from CSSConf and JSConf",
+					"date": "2013-12-31 17:30:00"
 				}
 			]
 		},
@@ -33,10 +35,12 @@
 			".": [
 				{
 					"title": "Everything You Need to Know About Grunt",
-					"tags": ["javascript"]
+					"date": "2014-01-01 08:00:00",
+					"tags": ["javascript", "javascript", "javascript", "javascript"]
 				},
 				{
 					"title": "Introducing Pure",
+					"date": "2014-01-03 20:00:05",
 					"tags": ["css", "pure"]
 				}
 			]

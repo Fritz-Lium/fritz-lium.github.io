@@ -2,3 +2,24 @@ img {
 	width: auto;
 	max-width: 100%;
 }
+
+/* learnt from Github */
+pre, code {
+	font-family: Consolas, "Liberation Mono", Courier, monospace, serif;
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+}
+pre {
+	padding: 6px 10px;
+	overflow: auto;
+	font-size: 80%;
+}
+code {
+	padding: 0px 5px;
+	margin: 0 2px;
+}
+pre > code {
+	border: none;
+	background-color: inherit;
+}

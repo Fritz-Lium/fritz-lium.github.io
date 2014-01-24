@@ -15,6 +15,13 @@
 .post-meta {
 	margin-top: 12px;
 }
+.post-date {
+	padding: 0.3em 0;
+	margin-right: 10px;
+}
+.post-category {
+	margin: 0 0.15em;
+}
 .post-description h1, .post-description h2, .post-description h3,
 .post-description h4, .post-description h5, .post-description h6 {
 	font-weight: 300;

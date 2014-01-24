@@ -2,6 +2,16 @@
  * Created by fritz on 1/23/14.
  */
 
+if (typeof markdown !== 'undefined') {
+	// replace tabs to spaces
+	var p = markdown.toHTML;
+	markdown.toHTML = function () {
+		var html = p.apply(markdown, arguments);
+		html = html.replace(/\t/g, '    ');
+		return html;
+	}
+}
+
 function getPostTags(post, allTags) {
 	var tags = _.map(post.tags || [], function (sTag) {
 		return findTag(allTags, sTag);
@@ -31,7 +41,6 @@ function getContentFile(target, pFile, callback) {
 
 function getContentMeta(target, callback) {
 	$.ajax({
-		cache: false,
 		url: '/content/' + target + '.json',
 		success: callback
 	});

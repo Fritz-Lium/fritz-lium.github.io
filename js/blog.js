@@ -39,6 +39,7 @@ function toPostHTML(post, i, posts) {
 	// tags
 	var tags = getPostTags(post, posts.allTags);
 	var $meta = $('<p class="post-meta">');
+	$('<span class="post-date">').text(moment(post.date).fromNow()).appendTo($meta);
 	_.each(tags, function (tag) {
 		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
 			.text(tag.title).css('background-color', tag.color).appendTo($meta);

@@ -30,6 +30,7 @@ function toPostHTML(post) {
 	$tmp.children('h1:first').wrap('<div class="header">');
 	// tags
 	var $meta = $('<p class="post-meta">');
+	$('<span class="post-date">').text(moment(post.date).fromNow()).appendTo($meta);
 	_.each(post._tags, function (tag) {
 		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
 			.text(tag.title).css('background-color', tag.color).appendTo($meta);
