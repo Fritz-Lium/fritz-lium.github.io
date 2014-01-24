@@ -16,12 +16,6 @@
 	});
 })();
 
-function getContentFileMap(target, pFileMap) {
-	return _.map(pFileMap, function (pFile) {
-		return getContentFile(target, pFile);
-	});
-}
-
 function getContentFile(target, pFile) {
 	var data = '';
 	$.ajax({

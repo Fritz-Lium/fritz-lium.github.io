@@ -3,11 +3,17 @@
 .footer {
 	color: #ccc;
 	font-size: 80%;
+	margin-top: 30px;
 }
 .footer p {
 	margin: 0.2em 0;
 }
 
-.posts .post {
+.post {
 	padding-bottom: 0.8em;
+}
+
+.post-description h1, .post-description h2, .post-description h3,
+.post-description h4, .post-description h5, .post-description h6 {
+	font-weight: 300;
 }

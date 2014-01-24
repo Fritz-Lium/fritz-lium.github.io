@@ -2,7 +2,7 @@
 
 ## How to use this layout
 
-To use this layout, you can just copy paste the HTML, along with the CSS in <a href="/css/pure-post.css">pure-post.css</a>, and the JavaScript in ui.js. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
+To use this layout, you can just copy paste the HTML, along with the CSS in [pure-post.css](/css/pure-post.css), and the JavaScript in ui.js. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
 
 ## Now Let's Speak Some Latin
 

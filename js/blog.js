@@ -8,12 +8,19 @@ $(document).ready(function () {
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
 		var posts = listPosts(data['files']);
-		var pFileMap = _.map(posts, function (post) {
-			return post['path'] + extension;
+		_.each(posts, function (post) {
+			var pFile = post['path'] + extension;
+			post.content = getContentFile(target, pFile);
 		});
-		var fileMap = getContentFileMap(target, pFileMap);
-		console.log(fileMap)
+		renderPosts(posts);
 	});
+});
+
+function renderPosts(posts) {
+	// order by date desc
+	posts = posts.reverse();
+	var postsHTML = _.map(posts, toPostHTML);
+	$('.posts').append(postsHTML);
 
 	// link to single post page
 	$('.posts').find('.post .post-title a').each(function (i, el) {
@@ -28,15 +35,18 @@ $(document).ready(function () {
 		var sTag = toSnakeCase(tag);
 		$(el).attr('href', '/?tag=' + sTag);
 	});
-});
+}
 
 function toPostHTML(post) {
 	var html = markdown.toHTML(post.content);
 	var $tmp = $('<div>').html(html);
-	// header h1
-	$tmp.children('h1:first').wrap('<div class="header">');
-	// content
-	$tmp.children().not('.header').wrapAll('<div class="content">');
+	// title
+	$tmp.children('h1:first').addClass('post-title')
+		.wrapInner('<a>').wrap('<header class="post-header">');
+	// description
+	$tmp.children().slice(1).wrapAll('<div class="post-description">');
+	// section
+	$tmp.wrapInner('<section class="post">');
 	return $tmp.html();
 }
 

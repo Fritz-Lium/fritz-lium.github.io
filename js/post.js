@@ -25,7 +25,7 @@ function toPostHTML(post) {
 	// header h1
 	$tmp.children('h1:first').wrap('<div class="header">');
 	// content
-	$tmp.children().not('.header').wrapAll('<div class="content">');
+	$tmp.children().slice(1).wrapAll('<div class="content">');
 	return $tmp.html();
 }
 
