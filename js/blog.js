@@ -11,12 +11,10 @@ $(document).ready(function () {
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
 		var allTags = data['tags'];
-		var posts = listPosts(data['files']).sort(function (a, b) {
-			// order by date desc
-			return moment(b.date).valueOf() - moment(a.date).valueOf();
-		});
-		var pageCount = Math.max(1, Math.ceil(posts.length / pageSize));
-		var page = ~~params['page'] || 1	;
+		// order by date desc
+		var posts = listPosts(data['files']).reverse();
+		var pageCount = Math.ceil(posts.length / pageSize) || 1;
+		var page = ~~params['page'] || 1;
 		// page bound
 		if (page < 1) {
 			location.href = '/?page=1';
@@ -80,21 +78,4 @@ function toPostHTML(post, i, posts) {
 	// section
 	$tmp.wrapInner('<section class="post">');
 	return $tmp.html();
-}
-
-function listPosts(files, pFile) {
-	pFile = pFile || '';
-	var posts = [];
-	for (var key in files) {
-		if (key === '.') {
-			posts = posts.concat(files[key]);
-			_.each(posts, function (post) {
-				var sTitle = toSnakeCase(post.title);
-				post.path = pFile + sTitle;
-			});
-		} else {
-			posts = posts.concat(listPosts(files[key], pFile + key + '/'));
-		}
-	}
-	return posts;
 }

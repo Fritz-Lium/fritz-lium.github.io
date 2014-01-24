@@ -12,6 +12,23 @@ if (typeof markdown !== 'undefined') {
 	}
 }
 
+function listPosts(files, pFile) {
+	pFile = pFile || '';
+	var posts = [];
+	for (var key in files) {
+		if (key === '.') {
+			posts = posts.concat(files[key]);
+			_.each(posts, function (post) {
+				var sTitle = toSnakeCase(post.title);
+				post.path = pFile + sTitle;
+			});
+		} else {
+			posts = posts.concat(listPosts(files[key], pFile + key + '/'));
+		}
+	}
+	return posts;
+}
+
 function getPostTags(post, allTags) {
 	var tags = _.map(post.tags || [], function (sTag) {
 		return findTag(allTags, sTag);

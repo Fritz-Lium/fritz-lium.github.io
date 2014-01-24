@@ -39,6 +39,13 @@
 	}
 }
 
+#menu .pure-menu-heading {
+	background-color: inherit;
+}
+#menu .pure-menu-selected a {
+	background-color: #1f8dd6!important;
+}
+
 .header {
 	padding-top: 1em;
 }

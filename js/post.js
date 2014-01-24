@@ -15,8 +15,24 @@ $(document).ready(function () {
 			post._tags = getPostTags(post, allTags);
 			renderPost(post);
 		});
+		// order by date desc
+		var posts = listPosts(data['files']).reverse();
+		renderMenu(posts, post);
 	});
 });
+
+function renderMenu(posts, post) {
+	var $tmp = _.reduce(posts, function ($memo, _post) {
+		var $li = $('<li>');
+		$('<a href="/post/?path=' + _post.path + '">')
+			.text(_post.title).appendTo($li);
+		if (_post === post) {
+			$li.addClass('pure-menu-selected');
+		}
+		return $memo.append($li);
+	}, $('<div>'));
+	$('#menu-list').append($tmp.html());
+}
 
 function renderPost(post) {
 	$('title').text(post.title);
@@ -30,7 +46,7 @@ function toPostHTML(post) {
 	$tmp.children('h1:first').wrap('<div class="header">');
 	// tags
 	var $meta = $('<p class="post-meta">');
-	$('<span class="post-date">').text(moment(post.date).fromNow()).appendTo($meta);
+	$meta.append('<span class="post-date">' + moment(post.date).fromNow() + '</span>');
 	_.each(post._tags, function (tag) {
 		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
 			.text(tag.title).css('background-color', tag.color).appendTo($meta);
@@ -57,20 +73,3 @@ function findPost(files, sPath) {
 		return toSnakeCase(post.title) === sTitle;
 	}
 }
-/*function findPost(files, sTitle, pFile) {
- pFile = pFile || '';
- var post;
- for (var key in files) {
- if (key === '.') {
- post = _.find(files[key], match);
- if (post) post.path = pFile + sTitle;
- } else {
- post = findPost(files[key], sTitle, pFile + key + '/');
- }
- if (post) break;
- }
- return post || null;
- function match(post) {
- return toSnakeCase(post.title) === sTitle;
- }
- }*/
