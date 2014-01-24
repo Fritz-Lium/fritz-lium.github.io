@@ -5,15 +5,26 @@ var params = getURLParams();
 
 $(document).ready(function () {
 	var pageSize = 3;
-	var page = params['page'] || 1;
 
 	// load posts
 	var target = 'posts';
 	getContentMeta(target, function (data) {
 		var extension = data['extension'];
 		var allTags = data['tags'];
-		var posts = listPosts(data['files']);
-		var pageCount = Math.ceil(posts.length / pageSize);
+		var posts = listPosts(data['files']).sort(function (a, b) {
+			// order by date desc
+			return moment(b.date).valueOf() - moment(a.date).valueOf();
+		});
+		var pageCount = Math.max(1, Math.ceil(posts.length / pageSize));
+		var page = ~~params['page'] || 1	;
+		// page bound
+		if (page < 1) {
+			location.href = '/?page=1';
+		} else if (page > pageCount) {
+			location.href = '/?page=' + pageCount;
+		}
+		var start = pageSize * (page - 1);
+		posts = posts.slice(start, start + pageSize);
 
 		var $paginator = $('#paginator');
 		$paginator.find('.current').text(page);
@@ -85,5 +96,5 @@ function listPosts(files, pFile) {
 			posts = posts.concat(listPosts(files[key], pFile + key + '/'));
 		}
 	}
-	return posts.reverse();
+	return posts;
 }
