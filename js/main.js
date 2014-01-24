@@ -5,7 +5,6 @@
 function getContentFile(target, pFile, callback) {
 	$.ajax({
 		cache: false,
-		async: false,
 		url: '/content/' + target + '/' + pFile,
 		success: function (data) {
 			callback(null, data);

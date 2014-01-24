@@ -26,13 +26,6 @@ function renderPosts(posts) {
 	var postsHTML = _.map(posts, toPostHTML);
 	$('.posts').append(postsHTML);
 
-	// link to single post page
-	$('.posts').find('.post .post-title a').each(function (i, el) {
-		var title = $(el).text();
-		var sTitle = toSnakeCase(title);
-		$(el).attr('href', '/post/?title=' + sTitle);
-	});
-
 	// link to tagged posts list
 	$('.posts').find('.post a.post-category').each(function (i, el) {
 		var tag = $(el).text();
@@ -46,7 +39,8 @@ function toPostHTML(post) {
 	var $tmp = $('<div>').html(html);
 	// title
 	$tmp.children('h1:first').addClass('post-title')
-		.wrapInner('<a>').wrap('<header class="post-header">');
+		.wrapInner('<a href="/post/?title=' + toSnakeCase(post.title) + '">')
+		.wrap('<header class="post-header">');
 	// description
 	$tmp.children().slice(1).wrapAll('<div class="post-description">');
 	// section
