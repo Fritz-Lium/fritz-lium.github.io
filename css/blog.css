@@ -40,3 +40,7 @@
 #paginator .pure-button {
 	height: 41px;
 }
+#paginator .current {
+	cursor: default;
+	text-decoration: none;
+}

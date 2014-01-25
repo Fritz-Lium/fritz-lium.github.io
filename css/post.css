@@ -50,7 +50,7 @@
 }
 
 .header {
-	padding-top: 1em;
+	padding-top: 1.6em;
 }
 .header h1 {
 	font-size: 2.2em;
@@ -95,4 +95,7 @@
 }
 .post-category:hover {
 	text-decoration: underline;
+}
+.content {
+	font-size: 110%;
 }
