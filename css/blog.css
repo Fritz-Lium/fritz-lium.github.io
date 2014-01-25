@@ -10,17 +10,19 @@
 }
 
 .post {
-	padding-bottom: 0.8em;
+	padding-bottom: 1em;
 }
 .post-meta {
 	margin-top: 12px;
 }
 .post-date {
-	padding: 0.3em 0;
-	margin-right: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
 }
 .post-category {
-	margin: 0 0.15em;
+	display: inline-block;
+	margin: 0 0.3em 0.3em 0;
 }
 .post-description h1, .post-description h2, .post-description h3,
 .post-description h4, .post-description h5, .post-description h6 {

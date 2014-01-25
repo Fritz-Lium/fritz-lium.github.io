@@ -62,14 +62,14 @@ function toPostHTML(post, i, posts) {
 	// tags
 	var tags = getPostTags(post, posts.allTags);
 	var $meta = $('<p class="post-meta">');
-	$('<span class="post-date">').text(moment(post.date).fromNow()).appendTo($meta);
 	_.each(tags, function (tag) {
 		$('<a class="post-category" href="/?tag=' + toSnakeCase(tag.title) + '">')
 			.text(tag.title).css('background-color', tag.color).appendTo($meta);
 	});
+	$('<span class="post-date">').text(moment(post.date).fromNow()).appendTo($meta);
 	$tmp.children('.post-header').append($meta);
 	// description
-	var $cut = $tmp.children('p').eq(1).nextAll();
+	var $cut = $tmp.children('p, pre').eq(1).nextAll();
 	$cut.remove();
 	if ($cut.length > 0) {
 		$('<p class="cutline">').text('> ... ...').appendTo($tmp);

@@ -39,6 +39,9 @@
 	}
 }
 
+#menu {
+	overflow-x: hidden;
+}
 #menu .pure-menu-heading {
 	background-color: inherit;
 }
@@ -77,11 +80,13 @@
 	text-align: right;
 }
 .post-date {
-
+	display: inline-block;
+	vertical-align: middle;
 	margin-right: 10px;
 }
 .post-category {
-	margin: 0 0.15em;
+	display: inline-block;
+	margin: 0 0 0.3em 0.3em;
 	padding: 0.3em 1em;
 	color: #fff;
 	background: #999;

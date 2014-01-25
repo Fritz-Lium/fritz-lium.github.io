@@ -24,10 +24,11 @@ $(document).ready(function () {
 function renderMenu(posts, post) {
 	var $tmp = _.reduce(posts, function ($memo, _post) {
 		var $li = $('<li>');
-		$('<a href="/post/?path=' + _post.path + '">')
-			.text(_post.title).appendTo($li);
+		var $a = $('<a>').text(_post.title).appendTo($li);
 		if (_post === post) {
 			$li.addClass('pure-menu-selected');
+		} else {
+			$a.attr('href', '/post/?path=' + _post.path);
 		}
 		return $memo.append($li);
 	}, $('<div>'));

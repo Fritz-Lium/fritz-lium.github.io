@@ -3,7 +3,7 @@ img {
 	max-width: 100%;
 }
 
-/* learnt from Github */
+/* partly learnt from Github */
 pre, code {
 	font-family: Consolas, "Liberation Mono", Courier, monospace, serif;
 	background-color: #f8f8f8;
@@ -17,7 +17,7 @@ pre {
 	line-height: 160%;
 }
 code {
-	padding: 0px 5px;
+	padding: 2px 5px;
 	margin: 0 2px;
 }
 pre > code {
