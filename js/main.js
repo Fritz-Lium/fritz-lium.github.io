@@ -12,6 +12,15 @@ if (typeof markdown !== 'undefined') {
 	}
 }
 
+function toURI(params) {
+	var segs = _.map(params, function (val, key) {
+		if (val == null) return false;
+		return key + '=' + encodeURIComponent(val);
+	});
+	segs = _.compact(segs);
+	return segs.length < 1 ? '/': '/?' + segs.join('&');
+}
+
 function listPosts(files, pFile) {
 	pFile = pFile || '';
 	var posts = [];
