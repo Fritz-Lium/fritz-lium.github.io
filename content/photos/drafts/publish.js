@@ -17,7 +17,7 @@ var datetime = toDatetime(date);
 var dirname = datetime.slice(0, 7);
 
 // move file
-var suffix = meta['suffix'] || '';
+var suffix = path.extname(file);
 var title = file.replace(new RegExp(suffix + '$'), '');
 var sTitle = toSnakeCase(title);
 var source = __dirname + '/' + file;
@@ -28,7 +28,7 @@ fs.renameSync(source, dest);
 // meta[files]
 var files = meta['files'];
 var oFile = {};
-oFile['title'] = title;
+oFile['title'] = toSnakeCase(file).replace(new RegExp(suffix + '$'), '');
 oFile['date'] = datetime;
 if (tags.length > 0) {
 	oFile['tags'] = tags.map(function (val) {
