@@ -17,20 +17,22 @@ var datetime = toDatetime(date);
 var dirname = datetime.slice(0, 7);
 
 // move file
+var suffix = meta['suffix'] || '';
+var title = file.replace(new RegExp(suffix + '$'), '');
+var sTitle = toSnakeCase(title);
 var source = __dirname + '/' + file;
-var dest = tardir + '/' + dirname + '/' + file;
+var dest = tardir + '/' + dirname + '/' + sTitle + suffix;
 fs.renameSync(source, dest);
 
 // meta[files]
-var suffix = meta['suffix'] || '';
 var files = meta['files'];
 var oFile = {};
-oFile['title'] = toSnakeCase(file).replace(new RegExp(suffix + '$'), '');
+oFile['title'] = title;
+oFile['date'] = datetime;
 if (tags.length > 0) {
 	var sTags = tags.map(function (val) {
 		return toSnakeCase(val);
 	});
-	oFile['date'] = datetime;
 	oFile['tags'] = sTags;
 }
 if (!files[dirname]) {
