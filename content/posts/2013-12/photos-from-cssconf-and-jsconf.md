@@ -2,8 +2,8 @@
 
 ## CSSConf Photos
 
-![](http://farm8.staticflickr.com/7448/8915936174_8d54ec76c6.jpg)
+![](/content/photos/cssconf-jsconf/Screenshot from 2014-01-08 14:10:59.png)
 
 ## JSConf Photos
 
-![](http://farm8.staticflickr.com/7382/8907351301_bd7460cffb.jpg)
+![](/content/photos/cssconf-jsconf/Screenshot from 2014-01-08 14:11:39.png)

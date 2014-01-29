@@ -1,5 +1,9 @@
 @import url("main.css");
 
+img {
+	max-width: 40%;
+}
+
 .footer {
 	color: #ccc;
 	font-size: 80%;

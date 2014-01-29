@@ -67,7 +67,7 @@ function getContentFile(target, pFile, callback) {
 
 function getContentMeta(target, callback) {
 	$.ajax({
-		url: '/content/' + target + '.json',
+		url: '/content/' + target + '/meta.json',
 		success: callback
 	});
 }
