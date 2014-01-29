@@ -1,6 +1,11 @@
 {
 	"name": "fritz-lium.github.io",
-	"version": "0.0.18",
+	"version": "0.0.19",
 	"description": "Fritz's Blog.",
-	"main": "run.js"
+	"main": "run.js",
+	"dependencies": {
+		"underscore": "*",
+		"express": "*",
+		"js-beautify": "*"
+	}
 }

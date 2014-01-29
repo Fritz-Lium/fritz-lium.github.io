@@ -8,7 +8,7 @@ $(document).ready(function () {
 	// load posts
 	var target = 'posts';
 	getContentMeta(target, function (data) {
-		var extension = data['extension'];
+		var suffix = data['suffix'] || '';
 		var allTags = data['tags'];
 		// order by date desc
 		var posts = listPosts(data['files']);
@@ -51,7 +51,7 @@ $(document).ready(function () {
 		}
 
 		async.map(posts, function (post, next) {
-			var pFile = post.path + extension;
+			var pFile = post.path + suffix;
 			getContentFile(target, pFile, function (err, data) {
 				post.content = data;
 				next(null, post);

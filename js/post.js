@@ -6,10 +6,10 @@ $(document).ready(function () {
 	var sPath = getURLParams()['path'];
 	var target = 'posts';
 	getContentMeta(target, function (data) {
-		var extension = data['extension'];
+		var suffix = data['suffix'];
 		var allTags = data['tags'];
 		var post = findPost(data['files'], sPath);
-		var pFile = sPath + extension;
+		var pFile = sPath + suffix;
 		getContentFile(target, pFile, function (err, data) {
 			post.content = data;
 			post._tags = getPostTags(post, allTags);
