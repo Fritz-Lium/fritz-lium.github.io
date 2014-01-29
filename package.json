@@ -1,5 +1,6 @@
 {
 	"name": "fritz-lium.github.io",
-	"version": "0.0.16",
-	"description": "Fritz's Blog."
+	"version": "0.0.17",
+	"description": "Fritz's Blog.",
+	"main": "run.js"
 }

@@ -12,14 +12,21 @@ $(document).ready(function () {
 		var allTags = data['tags'];
 		// order by date desc
 		var posts = listPosts(data['files']);
-		var tag = params['tag'];
-		if (tag) {
+		var sTag = params['tag'];
+		if (sTag) {
+			var defaultTag = allTags[0].title;
+			var tag = _.find(allTags, function (oTag) {
+				return toSnakeCase(oTag.title) === sTag;
+			});
 			posts = _.filter(posts, function (post) {
-				if (tag === toSnakeCase(allTags[0].title)) {
+				if (sTag === toSnakeCase(defaultTag)) {
 					return !post.tags || post.tags.length < 1;
 				}
-				return _.contains(post.tags, tag);
+				return _.contains(post.tags, sTag);
 			});
+			$('.content-subhead').text('Posts on Tag: ' + tag.title);
+		} else {
+			$('.content-subhead').text('Recent Posts');
 		}
 
 		posts = posts.reverse();
