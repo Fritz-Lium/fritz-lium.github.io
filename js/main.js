@@ -6,6 +6,7 @@ if (typeof markdown !== 'undefined') {
 	// replace tabs to spaces
 	var p = markdown.toHTML;
 	markdown.toHTML = function () {
+		arguments[0] = arguments[0]
 		var html = p.apply(markdown, arguments);
 		html = html.replace(/\t/g, '    ');
 		return html;
@@ -19,23 +20,6 @@ function toURI(params) {
 	});
 	segs = _.compact(segs);
 	return segs.length < 1 ? '/': '/?' + segs.join('&');
-}
-
-function listPosts(files, pFile) {
-	pFile = pFile || '';
-	var posts = [];
-	for (var key in files) {
-		if (key === '.') {
-			posts = posts.concat(files[key]);
-			_.each(posts, function (post) {
-				var sTitle = toSnakeCase(post.title);
-				post.path = pFile + sTitle;
-			});
-		} else {
-			posts = posts.concat(listPosts(files[key], pFile + key + '/'));
-		}
-	}
-	return posts;
 }
 
 function getPostTags(post, allTags) {
@@ -65,9 +49,9 @@ function getContentFile(target, pFile, callback) {
 	});
 }
 
-function getContentMeta(target, callback) {
+function getContentIndex(target, callback) {
 	$.ajax({
-		url: '/content/' + target + '/meta.json',
+		url: '/content/' + target + '/index.json',
 		success: callback
 	});
 }

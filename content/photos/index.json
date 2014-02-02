@@ -1,0 +1,28 @@
+{
+	"meta": {
+		"tags": [
+			{
+				"title": "Uncategorized",
+				"color": "#999"
+			},
+			{
+				"title": "Screenshot",
+				"color": "#5aba59"
+			}
+		]
+	},
+	"list": [
+		{
+			"file": "2013-12/albums.png",
+			"title": "Albums",
+			"date": "2014-01-08 14:10:59",
+			"tags": ["screenshot"]
+		},
+		{
+			"file": "2013-12/posts.png",
+			"title": "Posts",
+			"date": "2014-01-08 14:10:59",
+			"tags": ["screenshot"]
+		}
+	]
+}

@@ -3,15 +3,15 @@
  */
 var params = getURLParams();
 var pageSize = 3;
+var allTags;
 
 $(document).ready(function () {
 	// load posts
 	var target = 'posts';
-	getContentMeta(target, function (data) {
-		var suffix = data['suffix'] || '';
-		var allTags = data['tags'];
+	getContentIndex(target, function (data) {
+		allTags = data['meta']['tags'];
 		// order by date desc
-		var posts = listPosts(data['files']);
+		var posts = data['list'].reverse();
 		var sTag = params['tag'];
 		if (sTag) {
 			var defaultTag = allTags[0].title;
@@ -24,12 +24,11 @@ $(document).ready(function () {
 				}
 				return _.contains(post.tags, sTag);
 			});
-			$('.content-subhead').text('Posts on Tag: ' + tag.title);
+			$('.content-subhead').text('Posts on Tag \'' + tag.title + '\'');
 		} else {
-			$('.content-subhead').text('Recent Posts');
+			$('.content-subhead').text('All Posts');
 		}
 
-		posts = posts.reverse();
 		var pageCount = Math.ceil(posts.length / pageSize) || 1;
 		var page = ~~params['page'] || 1;
 		// page bound
@@ -51,8 +50,7 @@ $(document).ready(function () {
 		}
 
 		async.map(posts, function (post, next) {
-			var pFile = post.path + suffix;
-			getContentFile(target, pFile, function (err, data) {
+			getContentFile(target, post.file, function (err, data) {
 				post.content = data;
 				next(null, post);
 			});
@@ -69,15 +67,15 @@ function renderPosts(posts) {
 	$('.posts').append(postsHTML);
 }
 
-function toPostHTML(post, i, posts) {
+function toPostHTML(post) {
 	var html = markdown.toHTML(post.content);
 	var $tmp = $('<div>').html(html);
 	// title
 	$tmp.children('h1:first').addClass('post-title')
-		.wrapInner('<a href="/post/?path=' + post.path + '">')
+		.wrapInner('<a href="/post/?file=' + post.file + '">')
 		.wrap('<header class="post-header">');
 	// tags
-	var tags = getPostTags(post, posts.allTags);
+	var tags = getPostTags(post, allTags);
 	var $meta = $('<p class="post-meta">');
 	_.each(tags, function (tag) {
 		$('<a class="post-category" href="' + toURI({

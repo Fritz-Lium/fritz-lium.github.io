@@ -3,20 +3,20 @@
  */
 $(document).ready(function () {
 	// load post
-	var sPath = getURLParams()['path'];
+	var file = getURLParams()['file'];
 	var target = 'posts';
-	getContentMeta(target, function (data) {
-		var suffix = data['suffix'];
-		var allTags = data['tags'];
-		var post = findPost(data['files'], sPath);
-		var pFile = sPath + suffix;
-		getContentFile(target, pFile, function (err, data) {
+	getContentIndex(target, function (data) {
+		var allTags = data['meta']['tags'];
+		var post = _.find(data['list'], function(post){
+			return post.file === file;
+		});
+		getContentFile(target, file, function (err, data) {
 			post.content = data;
 			post._tags = getPostTags(post, allTags);
 			renderPost(post);
 		});
 		// order by date desc
-		var posts = listPosts(data['files']).reverse();
+		var posts = data['list'].reverse();
 		renderMenu(posts, post);
 	});
 });
@@ -28,7 +28,7 @@ function renderMenu(posts, post) {
 		if (_post === post) {
 			$li.addClass('pure-menu-selected');
 		} else {
-			$a.attr('href', '/post/?path=' + _post.path);
+			$a.attr('href', '/post/?file=' + _post.file);
 		}
 		return $memo.append($li);
 	}, $('<div>'));
@@ -56,21 +56,4 @@ function toPostHTML(post) {
 	// content
 	$tmp.children().slice(1).wrapAll('<div class="content">');
 	return $tmp.html();
-}
-
-function findPost(files, sPath) {
-	var segs = sPath.split('/');
-	var sTitle = segs.slice(-1)[0];
-	try {
-		var p = files;
-		_.each(segs.slice(0, -1), function (seg) {
-			p = p[seg];
-		});
-		return _.find(p['.'], match) || null;
-	} catch (err) {
-		return null;
-	}
-	function match(post) {
-		return toSnakeCase(post.title) === sTitle;
-	}
 }
