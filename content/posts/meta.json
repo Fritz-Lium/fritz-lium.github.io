@@ -36,12 +36,25 @@
 				{
 					"title": "Everything You Need to Know About Grunt",
 					"date": "2014-01-01 08:00:00",
-					"tags": ["javascript"]
+					"tags": [
+						"javascript"
+					]
 				},
 				{
 					"title": "Introducing Pure",
 					"date": "2014-01-03 20:00:05",
-					"tags": ["css", "pure"]
+					"tags": [
+						"css",
+						"pure"
+					]
+				}
+			]
+		},
+		"2014-02": {
+			".": [
+				{
+					"title": "aa",
+					"date": "2014-02-02 20:38:57"
 				}
 			]
 		}

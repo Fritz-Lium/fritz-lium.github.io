@@ -3,7 +3,6 @@
  */
 var fs = require('fs-extra');
 var path = require('path');
-var beautify = require('js-beautify');
 var file = process.argv[2];
 var tags = process.argv.slice(3);
 
@@ -22,7 +21,7 @@ var title = file.replace(new RegExp(suffix + '$'), '');
 var sTitle = toSnakeCase(title);
 var source = __dirname + '/' + file;
 var dest = tardir + '/' + dirname + '/' + sTitle + suffix;
-fs.mkdirpSync(__dirname);
+fs.mkdirpSync(path.dirname(dest));
 fs.renameSync(source, dest);
 
 // meta[files]
@@ -40,7 +39,7 @@ if (!files[dirname]) {
 	files[dirname]['.'] = [];
 }
 files[dirname]['.'].push(oFile);
-fs.writeFileSync(metaFile, beautify(JSON.stringify(meta)));
+fs.writeFileSync(metaFile, JSON.stringify(meta, null, '\t'));
 
 function toDatetime(date) {
 	date = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
